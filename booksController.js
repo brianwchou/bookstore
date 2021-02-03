@@ -1,43 +1,58 @@
 const booksDB = require('./booksDB');
 
-const deleteBooks = (req, res) => {
+const validIdMiddleware = (req, res, next) => {
     const { id } = req.params;
-    const indexToDelete = Number(id);
+    const index = Number(id);
 
-    if (indexToDelete < 0 || indexToDelete >= booksDB.length) {
-        res.send("record id is out of bounds").status(200);
+    if (index < 0 || index >= booksDB.length) {
+        res.send("record id is out of bounds").status(409);
         return;
-    }
-
-    booksDB.splice(indexToDelete, 1);
-
-    res.send("delete successful").status(400);
+    } 
+    next();
 }
-
+ 
 const addBookEntry = (req, res) => {
-    const body = req.body;
-    booksDB.push(body);
+    const newBookEntry = req.body;
+    booksDB.push(newBookEntry);
     res.send("record creation sucessful").status(201);
-}
-
-const getBookEntry = (req, res) => {
-    const { id } = req.params;
-    const recordIndex = Number(id);
-
-    if (recordIndex < 0 || recordIndex >= booksDB.length) {
-        res.send("record id is out of bounds").status(200);
-        return;
-    }
-    res.json(booksDB[recordIndex]).status(200);
 }
 
 const getAllBooks = (req, res) => {
     res.send(booksDB);
 }
 
+const getBookEntry = (req, res) => {
+    const { id } = req.params;
+    const recordIndex = Number(id);
+
+    res.json(booksDB[recordIndex]).status(200);
+}
+
+const updateBookEntry = (req, res) => {
+    const { id } = req.params;
+    const editedBookEntry = req.body;
+
+    const indexToUpdate = Number(id);
+
+    booksDB[indexToUpdate] = editedBookEntry;
+
+    res.send("record updated successfuly").status(200);
+}
+
+const deleteBooks = (req, res) => {
+    const { id } = req.params;
+    const indexToDelete = Number(id);
+
+    booksDB.splice(indexToDelete, 1);
+
+    res.send("delete successful").status(400);
+}
+
 module.exports = {
     deleteBooks,
     addBookEntry,
     getBookEntry,
-    getAllBooks
+    getAllBooks,
+    updateBookEntry,
+    validIdMiddleware
 }

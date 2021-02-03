@@ -4,22 +4,24 @@ const {
     deleteBooks, 
     addBookEntry, 
     getAllBooks, 
-    getBookEntry
+    getBookEntry,
+    updateBookEntry,
+    validIdMiddleware
 } = require('./booksController');
+const { unspecifiedRouteErrorHandler } = require('./errorController');
+
 const app = express();
 const port = 8080;
 
 app.use(bodyParser.json());
 
 app.get("/books", getAllBooks);
-app.get("/books/:id", getBookEntry);
+app.get("/books/:id", validIdMiddleware, getBookEntry);
 app.post("/books", addBookEntry);
-app.delete("/books/:id", deleteBooks);
+app.put("/books/:id", validIdMiddleware, updateBookEntry);
+app.delete("/books/:id", validIdMiddleware, deleteBooks);
 
-// unspecified request handler
-app.get('*', function(req, res){
-    res.status(404).send('route not found');
-});
+app.get('*', unspecifiedRouteErrorHandler);
 
 app.listen(port, () => {
     console.log(`app is running on port:${port}`);
