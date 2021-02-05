@@ -1,1 +1,4 @@
-module.exports = require("./books");
+module.exports = {
+  bookRoutes: require('./books'),
+  errorRoutes: require('./error'),
+};

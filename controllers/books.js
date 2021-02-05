@@ -1,9 +1,9 @@
-const booksDB = require("../db/booksDB");
+const booksDB = require('../db/booksDB');
 
 const addBookEntry = (req, res) => {
   const newBookEntry = req.body;
   booksDB.push(newBookEntry);
-  res.send("record creation sucessful").status(201);
+  res.send('record creation sucessful').status(201);
 };
 
 const getAllBooks = (req, res) => {
@@ -25,7 +25,7 @@ const updateBookEntry = (req, res) => {
 
   booksDB[indexToUpdate] = editedBookEntry;
 
-  res.send("record updated successfuly").status(200);
+  res.send('record updated successfuly').status(200);
 };
 
 const deleteBooks = (req, res) => {
@@ -34,7 +34,7 @@ const deleteBooks = (req, res) => {
 
   booksDB.splice(indexToDelete, 1);
 
-  res.send("delete successful").status(400);
+  res.send('delete successful').status(400);
 };
 
 module.exports = {
