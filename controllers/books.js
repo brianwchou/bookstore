@@ -1,20 +1,20 @@
-const booksDB = require('../db/booksDB');
+const { bookDB } = require('../db');
 
 const addBookEntry = (req, res) => {
   const newBookEntry = req.body;
-  booksDB.push(newBookEntry);
+  bookDB.push(newBookEntry);
   res.send('record creation sucessful').status(201);
 };
 
 const getAllBooks = (req, res) => {
-  res.send(booksDB);
+  res.send(bookDB);
 };
 
 const getBookEntry = (req, res) => {
   const { id } = req.params;
   const recordIndex = Number(id);
 
-  res.json(booksDB[recordIndex]).status(200);
+  res.json(bookDB[recordIndex]).status(200);
 };
 
 const updateBookEntry = (req, res) => {
@@ -23,7 +23,7 @@ const updateBookEntry = (req, res) => {
 
   const indexToUpdate = Number(id);
 
-  booksDB[indexToUpdate] = editedBookEntry;
+  bookDB[indexToUpdate] = editedBookEntry;
 
   res.send('record updated successfuly').status(200);
 };
@@ -32,7 +32,7 @@ const deleteBooks = (req, res) => {
   const { id } = req.params;
   const indexToDelete = Number(id);
 
-  booksDB.splice(indexToDelete, 1);
+  bookDB.splice(indexToDelete, 1);
 
   res.send('delete successful').status(400);
 };

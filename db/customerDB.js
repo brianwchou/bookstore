@@ -1,6 +1,7 @@
-const users = [
+const customers = [
   {
     id: 0,
+    username: 'sunglassesman',
     firstName: 'ringo',
     lastName: 'star',
     email: 'ringo@thebeatles.com',
@@ -8,6 +9,7 @@ const users = [
   },
   {
     id: 1,
+    username: 'johnmatron',
     firstName: 'john',
     lastName: 'lennon',
     email: 'john@thebeatles.com',
@@ -15,4 +17,4 @@ const users = [
   },
 ];
 
-module.exports = users;
+module.exports = customers;
