@@ -1,4 +1,5 @@
-const { bookDB, customerDB } = require('./index');
+const customerDB = require('./customerDB');
+const bookDB = require('./bookDB');
 
 /*
     relate customer and book and quantity
@@ -27,5 +28,3 @@ const { bookDB, customerDB } = require('./index');
 const cart = {
   record: new Array(customerDB.length).fill(new Array(bookDB.length).fill(0)),
 };
-
-console.log(cart);

@@ -1,4 +1,4 @@
-const booksDB = require('../db/bookDB');
+const { booksDB } = require('../db');
 
 const validIdMiddleware = (req, res, next) => {
   const { id } = req.params;

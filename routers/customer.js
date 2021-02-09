@@ -15,7 +15,7 @@ customerRouter.get('/find', (req, res) => {
   res.status(200).json(record);
 });
 
-customerRouter.post('/create', (req, res, next) => {
+customerRouter.post('/create', (req, res) => {
   let { username, firstName, lastName, email, password } = req.body;
 
   let customer = customerDB.find((entry) => {
