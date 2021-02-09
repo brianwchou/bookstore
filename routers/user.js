@@ -1,12 +1,12 @@
 const { Router } = require('express');
-const customerRouter = Router();
-const { customerDB } = require('../db');
+const userRouter = Router();
+const { userDB } = require('../db');
 
-customerRouter.get('/find', (req, res) => {
+userRouter.get('/find', (req, res) => {
   let firstName = req.query.firstName;
   let lastName = req.query.lastName;
 
-  let record = customerDB.find((entry) => {
+  let record = userDB.find((entry) => {
     if (entry.firstName === firstName || entry.lastName === lastName) {
       return entry;
     }
@@ -15,20 +15,20 @@ customerRouter.get('/find', (req, res) => {
   res.status(200).json(record);
 });
 
-customerRouter.post('/create', (req, res) => {
+userRouter.post('/create', (req, res) => {
   let { username, firstName, lastName, email, password } = req.body;
 
-  let customer = customerDB.find((entry) => {
+  let user = userDB.find((entry) => {
     if (entry.username === username) return entry;
   });
 
-  if (customer) {
+  if (user) {
     res.status(409).send('username is already in use');
     return;
   }
 
-  customerDB.push({
-    id: customerDB.length,
+  userDB.push({
+    id: userDB.length,
     username: username,
     firstName,
     lastName: lastName,
@@ -39,8 +39,8 @@ customerRouter.post('/create', (req, res) => {
   res.status(200).send('added a customer record');
 });
 
-customerRouter.get('/all', (req, res) => {
-  res.status(200).json(customerDB);
+userRouter.get('/all', (req, res) => {
+  res.status(200).json(userDB);
 });
 
-module.exports = customerRouter;
+module.exports = userRouter;

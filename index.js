@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { bookRoutes, errorRoutes, customerRoutes } = require('./routers');
+const { bookRoutes, errorRoutes, userRoutes } = require('./routers');
 const { bookDB, cartDB } = require('./db');
 const app = express();
 const port = 8080;
@@ -8,8 +8,13 @@ const port = 8080;
 app.use(bodyParser.json());
 
 // user wants to buy a book
-app.post('/users/:userId/cart/:cartId', (req, res) => {
-  const { userId, cartId } = req.params;
+app.post('/users/:userId/cart/', (req, res) => {
+  const { userId } = req.params;
+
+  // need to check if userID exists on the userid tablet
+  // if the user id does not exist then we need to send back a error to the calling side
+  //
+
   const booklist = req.body;
 
   // check if the books are in the database
@@ -41,7 +46,7 @@ app.post('/users/:userId/cart/:cartId', (req, res) => {
 });
 
 app.use('/books', bookRoutes);
-app.use('/customers', customerRoutes);
+app.use('/users', userRoutes);
 app.use('*', errorRoutes);
 
 app.listen(port, () => {
