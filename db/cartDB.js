@@ -28,3 +28,5 @@ const bookDB = require('./bookDB');
 const cart = {
   record: new Array(customerDB.length).fill(new Array(bookDB.length).fill(0)),
 };
+
+module.exports = cart;
