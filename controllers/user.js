@@ -1,8 +1,14 @@
 const { bookDB, cartDB } = require('../db/');
 
 function addBooksToCart(userId, books) {
-  // TODO rewrite logic due to new cart structure
-  // TODO create and use user controller/router
+  const bookIds = books.map((bookTitle) => {
+    let book = bookDB.find(({ title }) => title === bookTitle);
+    return book.id;
+  });
+
+  for (const bookId of bookIds) {
+    cartDB.addBookToUsersCart(userId, bookId);
+  }
 }
 
 function getNotFoundBooks(booklist) {

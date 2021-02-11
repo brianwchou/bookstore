@@ -1,29 +1,34 @@
 const userDB = require('./userDB');
 const bookDB = require('./bookDB');
 
-const cart = [
-  {
-    userId: userDB[0].id,
-    books: [
-      {
-        bookId: bookDB[1].id,
-        count: 2,
-      },
-    ],
-  },
-  {
-    userId: userDB[1].id,
-    books: [
-      {
-        bookId: bookDB[2].id,
-        count: 3,
-      },
-      {
-        bookId: bookDB[1].id,
-        count: 1,
-      },
-    ],
-  },
-];
+class CartDB {
+  constructor() {
+    this.data = new Map();
+  }
+  createNewCartForUser(userId) {
+    this.data.set(userId, new Map());
+  }
 
-module.exports = cart;
+  getUsersCart(userId) {
+    return this.data.get(userId);
+  }
+
+  addBookToUsersCart(userId, bookId) {
+    let usercart = this.getUsersCart(userId);
+
+    if (!usercart) {
+      this.createNewCartForUser(userId);
+      usercart = this.getUsersCart(userId);
+    }
+
+    let bookQuantities = usercart.get(bookId);
+
+    if (!bookQuantities) {
+      usercart.set(bookId, 1);
+    } else {
+      usercart.set(bookId, usercart.get(bookId) + 1);
+    }
+  }
+}
+
+module.exports = new CartDB();
