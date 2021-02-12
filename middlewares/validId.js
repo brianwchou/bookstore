@@ -17,6 +17,7 @@ const validateUserId = (req, res, next) => {
 
   if (userId < 0 || userId > userDB.length) {
     res.send('user id does not exist').status(409);
+    return;
   }
 
   next();

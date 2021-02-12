@@ -9,6 +9,6 @@ const { validateUserId } = require('../middlewares');
 
 userRouter.get('/find', findUserByFirstOrLastName);
 userRouter.post('/create', createUserEntry);
-userRouter.post('/:id/cart', validateUserId, putBooksInCart);
+userRouter.post('/:userId/cart', validateUserId, putBooksInCart);
 
 module.exports = userRouter;

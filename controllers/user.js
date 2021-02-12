@@ -14,7 +14,7 @@ function addBooksToCart(userId, books) {
 function getNotFoundBooks(booklist) {
   const existingBookTitles = bookDB.map((book) => book.title);
 
-  return booklist.filter(({ title }) => !existingBookTitles.includes(title));
+  return booklist.filter(({ title }) => existingBookTitles.includes(title));
 }
 
 function putBooksInCart(req, res) {
@@ -23,7 +23,7 @@ function putBooksInCart(req, res) {
 
   const notFoundBooks = getNotFoundBooks(booklist);
 
-  if (notFoundBooks.length) {
+  if (notFoundBooks.length > 0) {
     res.status(400).send(`Could not find book title: ${notFoundBooks.join()}`);
     return;
   }

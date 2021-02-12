@@ -5,8 +5,9 @@ class CartDB {
   constructor() {
     this.data = new Map();
   }
+
   createNewCartForUser(userId) {
-    this.data.set(userId, new Map());
+    return this.data.set(userId, new Map());
   }
 
   getUsersCart(userId) {
@@ -14,20 +15,29 @@ class CartDB {
   }
 
   addBookToUsersCart(userId, bookId) {
+    let userCart = this.getUsersCart(userId);
+    if (!this.data.has(userId)) {
+      userCart = this.createNewCartForUser(userId);
+    }
+
+    const newQuantity = !userCart.has(bookId) ? 1 : usercart.get(bookId) + 1;
+    userCart.set(bookId, newQuantity);
+  }
+
+  updateUserCart(userId, bookId, N) {
     let usercart = this.getUsersCart(userId);
 
-    if (!usercart) {
-      this.createNewCartForUser(userId);
-      usercart = this.getUsersCart(userId);
-    }
+    usercart.set(bookId, N);
+  }
 
-    let bookQuantities = usercart.get(bookId);
+  clearUserCart(userId) {
+    this.createNewCartForUser(userId);
+  }
 
-    if (!bookQuantities) {
-      usercart.set(bookId, 1);
-    } else {
-      usercart.set(bookId, usercart.get(bookId) + 1);
-    }
+  deleteBookFromUserCart(userId, bookId) {
+    const userCart = this.getUsersCart(userId);
+
+    userCart.delete(bookId);
   }
 }
 
