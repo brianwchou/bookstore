@@ -1,4 +1,4 @@
-const { bookDB, cartDB } = require('../db/');
+const { bookDB, cartDB, userDB } = require('../db/');
 
 function addBooksToCart(userId, books) {
   const bookIds = books.map((bookTitle) => {
@@ -60,12 +60,14 @@ function createUserEntry(req, res) {
 
   userDB.push({
     id: userDB.length,
-    username: username,
+    username,
     firstName,
-    lastName: lastName,
-    email: email,
-    password: password,
+    lastName,
+    email,
+    password,
   });
+
+  console.log(userDB);
 
   res.status(200).send('added a customer record');
 }
