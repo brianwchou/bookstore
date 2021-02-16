@@ -2,18 +2,18 @@ const { Router } = require('express');
 const booksRouter = Router();
 const {
   deleteBooks,
-  addBookEntry,
+  addBook,
   getAllBooks,
-  getBookEntry,
-  updateBookEntry,
+  getBook,
+  updateBook,
 } = require('../controllers/books');
 
 const { validateBookId } = require('../middlewares');
 
 booksRouter.get('/', getAllBooks);
-booksRouter.get('/:id', validateBookId, getBookEntry);
-booksRouter.post('/', addBookEntry);
-booksRouter.put('/:id', validateBookId, updateBookEntry);
-booksRouter.delete('/:id', validateBookId, deleteBooks);
+booksRouter.get('/:bookId', validateBookId, getBook);
+booksRouter.post('/', addBook);
+booksRouter.put('/:bookId', validateBookId, updateBook);
+booksRouter.delete('/:bookId', validateBookId, deleteBooks);
 
 module.exports = booksRouter;

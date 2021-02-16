@@ -1,46 +1,49 @@
-const { bookDB } = require('../db');
+const { bookRepository } = require('../repositories');
 
-const addBookEntry = (req, res) => {
-  const newBookEntry = req.body;
-  bookDB.push(newBookEntry);
+const addBook = (req, res) => {
+  const { author, title, pages } = req.body;
+
+  bookRepository.addBookWithAuthorTitleAndPages(author, title, pages);
+
   res.send('record creation sucessful').status(201);
 };
 
 const getAllBooks = (req, res) => {
-  res.send(bookDB);
+  let books = bookRepository.getAllBooks();
+
+  res.send(books).status(200);
 };
 
-const getBookEntry = (req, res) => {
-  const { id } = req.params;
-  const recordIndex = Number(id);
+const getBook = (req, res) => {
+  const { bookId } = req.params;
 
-  res.json(bookDB[recordIndex]).status(200);
+  let book = bookRepository.getBookWithId(bookId);
+
+  res.json(book).status(200);
 };
 
-const updateBookEntry = (req, res) => {
-  const { id } = req.params;
-  const editedBookEntry = req.body;
+const updateBook = (req, res) => {
+  const { bookId } = req.params;
+  const { author, title, pages } = req.body;
 
-  const indexToUpdate = Number(id);
-
-  bookDB[indexToUpdate] = editedBookEntry;
+  bookRepository.updateBookWithId(bookId, author, title, pages);
 
   res.send('record updated successfuly').status(200);
 };
 
+// need to move this logic into a different layer
 const deleteBooks = (req, res) => {
-  const { id } = req.params;
-  const indexToDelete = Number(id);
+  const { bookId } = req.params;
 
-  bookDB.splice(indexToDelete, 1);
+  bookRepository.deleteBookWithId(bookId);
 
   res.send('delete successful').status(400);
 };
 
 module.exports = {
   deleteBooks,
-  addBookEntry,
-  getBookEntry,
+  addBook,
+  getBook,
   getAllBooks,
-  updateBookEntry,
+  updateBook,
 };

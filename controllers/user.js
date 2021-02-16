@@ -21,6 +21,7 @@ function putBooksInCart(req, res) {
   const { userId } = req.params;
   const booklist = req.body;
 
+  // should go into book service layer
   const notFoundBooks = getNotFoundBooks(booklist);
 
   if (notFoundBooks.length > 0) {
@@ -28,6 +29,7 @@ function putBooksInCart(req, res) {
     return;
   }
 
+  // user service
   addBooksToCart(userId, booklist);
 
   res.status(200).send('data received');
@@ -45,6 +47,8 @@ function findUserByFirstOrLastName(req, res) {
 
   res.status(200).json(record);
 }
+
+function finduserby(firstName, lastName) {}
 
 function createUserEntry(req, res) {
   let { username, firstName, lastName, email, password } = req.body;
