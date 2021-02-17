@@ -31,7 +31,6 @@ const updateBook = (req, res) => {
   res.send('record updated successfuly').status(200);
 };
 
-// need to move this logic into a different layer
 const deleteBooks = (req, res) => {
   const { bookId } = req.params;
 

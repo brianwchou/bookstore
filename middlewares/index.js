@@ -1,1 +1,1 @@
-module.exports = require('./validId');
+module.exports = require('./validations');

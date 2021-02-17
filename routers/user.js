@@ -1,14 +1,14 @@
 const { Router } = require('express');
 const userRouter = Router();
 const {
-  findUserByFirstOrLastName,
-  createUserEntry,
+  getUserByName,
+  createUser,
   putBooksInCart,
 } = require('../controllers/user');
 const { validateUserId } = require('../middlewares');
 
-userRouter.get('/find', findUserByFirstOrLastName);
-userRouter.post('/create', createUserEntry);
+userRouter.get('/find', getUserByName);
+userRouter.post('/create', createUser);
 userRouter.post('/:userId/cart', validateUserId, putBooksInCart);
 
 module.exports = userRouter;

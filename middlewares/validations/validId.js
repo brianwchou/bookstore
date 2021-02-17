@@ -1,5 +1,5 @@
-const { booksDB } = require('../db');
-const { userDB } = require('../db');
+const { booksDB } = require('../../db');
+const { userDB } = require('../../db');
 
 const validateBookId = (req, res, next) => {
   const { id } = req.params;
