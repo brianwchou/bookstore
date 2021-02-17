@@ -1,33 +1,6 @@
 const userDB = require('./userDB');
 const bookDB = require('./bookDB');
 
-/*
-const database = 
-  {
-    user: []
-
-    books: []
-
-    cart: new Map
-  };
-
-
-  create specifc classes
-  with specifc data
-  CRUD methods
-  class Cart {
-    create()
-    get()
-    getAll()
-    update()
-    delete()
-  }
-
-  // fs module
-  // store data in files
-*/
-
-// cart repository
 class CartDB {
   constructor() {
     this.data = new Map();

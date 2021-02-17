@@ -1,3 +1,4 @@
 module.exports = {
-  userValidation: require('./validId'),
+  userValidation: require('./user'),
+  bookValidation: require('./book'),
 };

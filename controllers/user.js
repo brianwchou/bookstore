@@ -1,4 +1,4 @@
-const { bookService, usercartService, userService } = require('../services');
+const { usercartService, userService } = require('../services');
 
 function putBooksInCart(req, res) {
   const { userId } = req.params;
@@ -34,7 +34,7 @@ function createUser(req, res) {
     if (error.message === 'Username in use') {
       res.status(409).send('username is already in use');
       return;
-    }
+    } else throw error;
   }
 }
 

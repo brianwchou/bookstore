@@ -8,12 +8,12 @@ const {
   updateBook,
 } = require('../controllers/books');
 
-const { validateBookId } = require('../middlewares');
+const { bookValidation } = require('../middlewares');
 
 booksRouter.get('/', getAllBooks);
-booksRouter.get('/:bookId', validateBookId, getBook);
+booksRouter.get('/:bookId', bookValidation.validateBookId, getBook);
 booksRouter.post('/', addBook);
-booksRouter.put('/:bookId', validateBookId, updateBook);
-booksRouter.delete('/:bookId', validateBookId, deleteBooks);
+booksRouter.put('/:bookId', bookValidation.validateBookId, updateBook);
+booksRouter.delete('/:bookId', bookValidation.validateBookId, deleteBooks);
 
 module.exports = booksRouter;

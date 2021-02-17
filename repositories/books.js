@@ -1,7 +1,12 @@
 const { bookDB } = require('../db');
 
 function addBookWithAuthorTitleAndPages(author, title, pages) {
-  bookDB.push({ author, title, pages });
+  bookDB.push({
+    id: bookDB.length,
+    author,
+    title,
+    pages,
+  });
 }
 
 function getBookWithId(id) {
