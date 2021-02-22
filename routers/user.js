@@ -7,8 +7,8 @@ const {
 } = require('../controllers/user');
 const { userValidation } = require('../middlewares');
 
-userRouter.get('/find', getUserByName);
-userRouter.post('/add', addUser);
+userRouter.get('/', getUserByName);
+userRouter.post('/', addUser);
 userRouter.post('/:userId/cart', userValidation.validateUserId, putBooksInCart);
 
 module.exports = userRouter;
