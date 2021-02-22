@@ -1,12 +1,7 @@
 const { Router } = require('express');
 const booksRouter = Router();
-const {
-  deleteBooks,
-  getAllBooks,
-  updateBook,
-} = require('../controllers/books');
 
-const { createBook, getBook } = require('../services/book');
+const { bookService } = require('../services');
 
 const { bookValidation } = require('../middlewares');
 
@@ -14,12 +9,12 @@ booksRouter.get('/', getAllBooks);
 booksRouter.get('/:bookId', bookValidation.validateBookId, getBookById);
 booksRouter.post('/', addBook);
 booksRouter.put('/:bookId', bookValidation.validateBookId, updateBook);
-booksRouter.delete('/:bookId', bookValidation.validateBookId, deleteBooks);
+booksRouter.delete('/:bookId', bookValidation.validateBookId, deleteBook);
 
 function addBook(req, res) {
   const { author, title, pages } = req.body;
 
-  createBook(author, title, pages);
+  bookService.createBook(author, title, pages);
 
   res.send('record creation sucessful').status(201);
 }
@@ -27,9 +22,32 @@ function addBook(req, res) {
 function getBookById(req, res) {
   const { bookId } = req.params;
 
-  const book = getBook(bookId);
+  const book = bookService.getBook(bookId);
 
   res.json(book).status(200);
+}
+
+function getAllBooks(req, res) {
+  const books = bookService.getAllBooks();
+
+  res.send(books).status(200);
+}
+
+function updateBook(req, res) {
+  const { bookId } = req.params;
+  const { author, title, pages } = req.body;
+
+  bookService.updateBook({ bookId, author, title, pages });
+
+  res.send('record updated successfuly').status(200);
+}
+
+function deleteBook(req, res) {
+  const { bookId } = req.params;
+
+  bookService.deleteBook(bookId);
+
+  res.send('delete successful').status(400);
 }
 
 module.exports = booksRouter;

@@ -16,8 +16,23 @@ function getBook(id) {
   return bookRepository.getBookWithId(id);
 }
 
+function getAllBooks() {
+  return bookRepository.getAllBooks();
+}
+
+function updateBook(bookData) {
+  bookRepository.updateBookWithId(bookData);
+}
+
+function deleteBook(id) {
+  bookRepository.deleteBookWithId(id);
+}
+
 module.exports = {
   getNotFoundBooks,
   createBook,
   getBook,
+  updateBook,
+  getAllBooks,
+  deleteBook,
 };
