@@ -15,9 +15,9 @@ function addUser(username, firstName, lastName, email, password) {
   });
 }
 
-function getUserRecord(firstName, lastName) {
+function getUserRecordById(id) {
   return userDB.find((entry) => {
-    if (entry.firstName === firstName || entry.lastName === lastName) {
+    if (entry.id === id) {
       return entry;
     }
   });
@@ -26,5 +26,5 @@ function getUserRecord(firstName, lastName) {
 module.exports = {
   hasUsername,
   addUser,
-  getUserRecord,
+  getUserRecordById,
 };

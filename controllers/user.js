@@ -19,7 +19,7 @@ function putBooksInCart(req, res) {
 function getUserByName(req, res) {
   const { firstName, lastName } = req.query;
 
-  let record = userService.findUserByName(firstName, lastName);
+  let record = userService.findUserById(firstName, lastName);
 
   res.status(200).json(record);
 }

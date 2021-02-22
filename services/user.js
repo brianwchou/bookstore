@@ -1,7 +1,7 @@
 const { userRepository } = require('../repositories');
 
-function findUserByName(firstName, lastName) {
-  return userRepository.getUserRecord(firstName, lastName);
+function findUserById(userId) {
+  return userRepository.getUserRecordById(userId);
 }
 
 function createNewUser(username, firstName, lastName, email, password) {
