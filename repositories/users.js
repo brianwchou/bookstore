@@ -4,14 +4,14 @@ function hasUsername(username) {
   return userDB.some((entry) => entry.username === username);
 }
 
-function addUser(username, firstName, lastName, email, password) {
+function addUser(userData) {
   userDB.push({
     id: userDB.length,
-    username,
-    firstName,
-    lastName,
-    email,
-    password,
+    username: userData.username,
+    firstName: userData.firstName,
+    lastName: userData.lastName,
+    email: userData.email,
+    password: userData.password,
   });
 }
 

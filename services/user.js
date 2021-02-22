@@ -4,11 +4,11 @@ function findUserById(userId) {
   return userRepository.getUserRecordById(userId);
 }
 
-function createNewUser(username, firstName, lastName, email, password) {
-  if (hasUsername(username)) {
+function createNewUser(newUserData) {
+  if (hasUsername(newUserData.username)) {
     throw new Error('Username in use');
   }
-  userRepository.addUser(username, firstName, lastName, email, password);
+  userRepository.addUser(newUserData);
 }
 
 module.exports = {

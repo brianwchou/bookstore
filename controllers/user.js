@@ -28,7 +28,7 @@ function addUser(req, res) {
   let { username, firstName, lastName, email, password } = req.body;
 
   try {
-    userService.create(username, firstName, lastName, email, password);
+    userService.create({ username, firstName, lastName, email, password });
     res.status(200).send('added a customer record');
   } catch (error) {
     if (error.message === 'Username in use') {
