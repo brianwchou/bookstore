@@ -1,6 +1,6 @@
 const { bookDB } = require('../db');
 
-function addBookWithAuthorTitleAndPages(author, title, pages) {
+function addBook(author, title, pages) {
   bookDB.push({
     id: bookDB.length,
     author,
@@ -33,7 +33,7 @@ function deleteBookWithId(id) {
 }
 
 module.exports = {
-  addBookWithAuthorTitleAndPages,
+  addBook,
   getBookWithId,
   getAllBooks,
   deleteBookWithId,
