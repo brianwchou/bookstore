@@ -12,6 +12,6 @@ function createNewUser(username, firstName, lastName, email, password) {
 }
 
 module.exports = {
-  findUserByName,
+  findUserById,
   createNewUser,
 };

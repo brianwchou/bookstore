@@ -16,10 +16,10 @@ function putBooksInCart(req, res) {
   }
 }
 
-function getUserByName(req, res) {
-  const { firstName, lastName } = req.query;
+function getUserById(req, res) {
+  const { userId } = req.query;
 
-  let record = userService.findUserById(firstName, lastName);
+  let record = userService.findUserById(userId);
 
   res.status(200).json(record);
 }
@@ -39,7 +39,7 @@ function addUser(req, res) {
 }
 
 module.exports = {
-  getUserByName,
+  getUserById,
   addUser,
   putBooksInCart,
 };
