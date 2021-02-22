@@ -25,7 +25,7 @@ class CartDB {
   }
 
   updateUserCart(userId, bookId, N) {
-    let usercart = this.getUsersCart(userId);
+    const usercart = this.getUsersCart(userId);
 
     usercart.set(bookId, N);
   }

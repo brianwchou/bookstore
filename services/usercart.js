@@ -5,7 +5,7 @@ function addBooksToCart(userId, books) {
   }
 
   const bookIds = books.map((bookTitle) => {
-    let book = bookDB.find(({ title }) => title === bookTitle);
+    const book = bookDB.find(({ title }) => title === bookTitle);
     return book.id;
   });
 

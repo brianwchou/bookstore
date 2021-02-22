@@ -1,7 +1,7 @@
 const { bookRepository } = require('../repositories');
 
 const getAllBooks = (req, res) => {
-  let books = bookRepository.getAllBooks();
+  const books = bookRepository.getAllBooks();
 
   res.send(books).status(200);
 };

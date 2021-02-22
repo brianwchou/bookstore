@@ -19,13 +19,13 @@ function putBooksInCart(req, res) {
 function getUserById(req, res) {
   const { userId } = req.query;
 
-  let record = userService.findUserById(userId);
+  const record = userService.findUserById(userId);
 
   res.status(200).json(record);
 }
 
 function addUser(req, res) {
-  let { username, firstName, lastName, email, password } = req.body;
+  const { username, firstName, lastName, email, password } = req.body;
 
   try {
     userService.create({ username, firstName, lastName, email, password });
