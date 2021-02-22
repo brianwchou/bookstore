@@ -24,7 +24,7 @@ function getUserByName(req, res) {
   res.status(200).json(record);
 }
 
-function createUser(req, res) {
+function addUser(req, res) {
   let { username, firstName, lastName, email, password } = req.body;
 
   try {
@@ -40,6 +40,6 @@ function createUser(req, res) {
 
 module.exports = {
   getUserByName,
-  createUser,
+  addUser,
   putBooksInCart,
 };
