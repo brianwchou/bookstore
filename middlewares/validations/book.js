@@ -1,6 +1,6 @@
 const { booksDB } = require('../../db');
 
-const validateBookId = (req, res, next) => {
+function validateBookId(req, res, next) {
   const { id } = req.params;
   const index = Number(id);
 
@@ -9,7 +9,7 @@ const validateBookId = (req, res, next) => {
     return;
   }
   next();
-};
+}
 
 module.exports = {
   validateBookId,

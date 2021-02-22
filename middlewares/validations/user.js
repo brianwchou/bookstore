@@ -1,6 +1,6 @@
 const { userDB } = require('../../db');
 
-const validateUserId = (req, res, next) => {
+function validateUserId(req, res, next) {
   const { userId } = req.params;
 
   if (userId < 0 || userId > userDB.length) {
@@ -9,7 +9,7 @@ const validateUserId = (req, res, next) => {
   }
 
   next();
-};
+}
 
 module.exports = {
   validateUserId,
