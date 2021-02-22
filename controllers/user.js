@@ -1,11 +1,11 @@
-const { usercartService, userService } = require('../services');
+const { userCartService, userService } = require('../services');
 
 function putBooksInCart(req, res) {
   const { userId } = req.params;
   const booklist = req.body;
 
   try {
-    usercartService.addBooksToCart(userId, booklist);
+    userCartService.addBooksToCart(userId, booklist);
     res.status(200).send('data received');
   } catch (error) {
     if (error.message === 'List contains unknown books') {

@@ -1,5 +1,5 @@
 module.exports = {
   bookService: require('./book'),
-  usercartService: require('./usercart'),
+  userCartService: require('./usercart'),
   userService: require('./user'),
 };
