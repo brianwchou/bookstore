@@ -22,14 +22,7 @@ function updateBookWithId(id, author, title, pages) {
 }
 
 function deleteBookWithId(id) {
-  if (id === 0) {
-    bookDB = bookDB.slice(1, bookDB.length);
-  } else {
-    let firsthalf = bookDB.slice(0, id);
-    let secondhalf = bookDB.slice(id + 1, bookDB.length);
-
-    bookDB = [...firsthalf, ...secondhalf];
-  }
+  bookDB.splice(indexToDelete, 1);
 }
 
 module.exports = {
