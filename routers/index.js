@@ -1,5 +1,5 @@
 module.exports = {
-  bookRoutes: require('./books'),
-  errorRoutes: require('./error'),
-  userRoutes: require('./user'),
+  bookRouter: require('./books'),
+  errorRouter: require('./error'),
+  userRouter: require('./user'),
 };
