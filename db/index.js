@@ -1,5 +1,5 @@
 module.exports = {
-  customerDB: require('./customerDB'),
+  userDB: require('./userDB'),
   bookDB: require('./bookDB'),
-  cartDB: require('.cartDB'),
+  cartDB: require('./cartDB'),
 };

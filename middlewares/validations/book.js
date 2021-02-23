@@ -1,6 +1,6 @@
-const booksDB = require('../db/bookDB');
+const { booksDB } = require('../../db');
 
-const validIdMiddleware = (req, res, next) => {
+function validateBookId(req, res, next) {
   const { id } = req.params;
   const index = Number(id);
 
@@ -9,6 +9,8 @@ const validIdMiddleware = (req, res, next) => {
     return;
   }
   next();
-};
+}
 
-module.exports = validIdMiddleware;
+module.exports = {
+  validateBookId,
+};

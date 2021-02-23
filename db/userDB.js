@@ -1,4 +1,4 @@
-const customers = [
+const users = [
   {
     id: 0,
     username: 'sunglassesman',
@@ -17,4 +17,4 @@ const customers = [
   },
 ];
 
-module.exports = customers;
+module.exports = users;

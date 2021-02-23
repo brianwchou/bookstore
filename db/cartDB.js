@@ -1,31 +1,44 @@
-const { bookDB, customerDB } = require('./index');
+const userDB = require('./userDB');
+const bookDB = require('./bookDB');
 
-/*
-    relate customer and book and quantity
+class CartDB {
+  constructor() {
+    this.data = new Map();
+  }
 
-    store using a matrix
+  createNewCartForUser(userId) {
+    return this.data.set(userId, new Map());
+  }
 
-    customerDB is a 1d array
-    bookDB is another 1d array
+  getUsersCart(userId) {
+    return this.data.get(userId);
+  }
 
-    cartDB should be a 2d array
+  addBookToUsersCart(userId, bookId) {
+    let userCart = this.getUsersCart(userId);
+    if (!this.data.has(userId)) {
+      userCart = this.createNewCartForUser(userId);
+    }
 
-    [[]]
+    const newQuantity = !userCart.has(bookId) ? 1 : usercart.get(bookId) + 1;
+    userCart.set(bookId, newQuantity);
+  }
 
-    cartDB should update when there is a new relation between books and customer
-    i want to be able to fetch how many books and kinds a customer has as well as how many
-    of a book are in people's carts
+  updateUserCart(userId, bookId, N) {
+    const usercart = this.getUsersCart(userId);
 
-    cart should be a 2d array where every index should relate to the index of a a given
-    customer or a book
+    usercart.set(bookId, N);
+  }
 
-    when bookdb gets updated with a new entry cartDB should be updated with a new row
-    when shop owner removes a book from the database, the row should also be removed from
-    this record
-*/
+  clearUserCart(userId) {
+    this.createNewCartForUser(userId);
+  }
 
-const cart = {
-  record: new Array(customerDB.length).fill(new Array(bookDB.length).fill(0)),
-};
+  deleteBookFromUserCart(userId, bookId) {
+    const userCart = this.getUsersCart(userId);
 
-console.log(cart);
+    userCart.delete(bookId);
+  }
+}
+
+module.exports = new CartDB();
