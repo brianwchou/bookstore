@@ -1,7 +1,8 @@
 const { Router } = require('express');
-const userRouter = Router();
 const { userValidation } = require('../middlewares');
 const { userCartService, userService } = require('../services');
+
+const userRouter = Router();
 
 userRouter.get('/', getUserById);
 userRouter.post('/', addUser);

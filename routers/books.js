@@ -1,9 +1,8 @@
 const { Router } = require('express');
-const booksRouter = Router();
-
 const { bookService } = require('../services');
-
 const { bookValidation } = require('../middlewares');
+
+const booksRouter = Router();
 
 booksRouter.get('/', getAllBooks);
 booksRouter.get('/:bookId', bookValidation.validateBookId, getBookById);

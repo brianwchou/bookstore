@@ -1,4 +1,5 @@
 const { Router } = require('express');
+
 const errorRouter = Router();
 
 errorRouter.all('*', unspecifiedRouteErrorHandler);
