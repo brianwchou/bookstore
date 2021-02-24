@@ -1,5 +1,14 @@
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  user: 'brian-chou',
+  host: 'localhost',
+  database: 'bookstore',
+  port: 5432,
+});
+
 module.exports = {
-  userDB: require('./userDB'),
-  bookDB: require('./bookDB'),
-  cartDB: require('./cartDB'),
+  query: (text, params, callback) => {
+    return pool.query(text, params, callback);
+  },
 };

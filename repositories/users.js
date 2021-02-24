@@ -1,27 +1,17 @@
-const { userDB } = require('../db');
+const db = require('../db');
 
-function hasUsername(username) {
-  return userDB.some((entry) => entry.username === username);
-}
+function hasUsername(username) {}
 
 function addUser(userData) {
-  userDB.push({
-    id: userDB.length,
-    username: userData.username,
-    firstName: userData.firstName,
-    lastName: userData.lastName,
-    email: userData.email,
-    password: userData.password,
+  db.query(
+    'INSERT INTO users(firstname, lastname, email, password, username) VALUES ($1,$2,$3,$4,$5)',
+    [username, firstName, lastName, email, password]
+  ).then((res) => {
+    console.log(res.rows);
   });
 }
 
-function getUserRecordById(id) {
-  return userDB.find((entry) => {
-    if (entry.id === id) {
-      return entry;
-    }
-  });
-}
+function getUserRecordById(id) {}
 
 module.exports = {
   hasUsername,
