@@ -34,9 +34,14 @@ function getUserById(req, res) {
 
 function addUser(req, res) {
   const { username, firstName, lastName, email, password } = req.body;
-
   try {
-    userService.create({ username, firstName, lastName, email, password });
+    userService.createNewUser({
+      username,
+      firstName,
+      lastName,
+      email,
+      password,
+    });
     res.status(200).send('added a customer record');
   } catch (error) {
     if (error.message === 'Username in use') {

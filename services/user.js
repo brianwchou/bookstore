@@ -4,8 +4,8 @@ function findUserById(userId) {
   return userRepository.getUserRecordById(userId);
 }
 
-function createNewUser(newUserData) {
-  if (hasUsername(newUserData.username)) {
+async function createNewUser(newUserData) {
+  if (userRepository.hasUsername(newUserData.username)) {
     throw new Error('Username in use');
   }
   userRepository.addUser(newUserData);
