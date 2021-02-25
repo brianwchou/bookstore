@@ -5,7 +5,7 @@ const { bookValidation } = require('../middlewares');
 const booksRouter = Router();
 
 booksRouter.get('/', getAllBooks);
-booksRouter.get('/:bookId', bookValidation.validateBookId, getBookById);
+booksRouter.get('/:bookId', getBookById);
 booksRouter.post('/', addBook);
 booksRouter.put('/:bookId', bookValidation.validateBookId, updateBook);
 booksRouter.delete('/:bookId', bookValidation.validateBookId, deleteBook);
@@ -18,10 +18,10 @@ function addBook(req, res) {
   res.send('record creation sucessful').status(201);
 }
 
-function getBookById(req, res) {
+async function getBookById(req, res) {
   const { bookId } = req.params;
 
-  const book = bookService.getBook(bookId);
+  const book = await bookService.getBookById(bookId);
 
   res.json(book).status(200);
 }

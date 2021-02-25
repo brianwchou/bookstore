@@ -8,8 +8,10 @@ async function addBook(author, title, pages) {
   ]);
 }
 
-function getBookWithId(id) {
-  return bookDB[id];
+async function getBookWithId(id) {
+  return db.query('SELECT * FROM books WHERE id=$1', [id]).then((res) => {
+    return res.rows;
+  });
 }
 
 function getAllBooks() {
