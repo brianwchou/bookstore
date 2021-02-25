@@ -28,7 +28,7 @@ function updateBookWithId({ id, author, title, pages }) {
 }
 
 function deleteBookWithId(id) {
-  bookDB.splice(indexToDelete, 1);
+  db.query('DELETE FROM books WHERE id=$1', [id]);
 }
 
 module.exports = {
