@@ -10,7 +10,7 @@ async function addBook(author, title, pages) {
 
 async function getBookWithId(id) {
   return db.query('SELECT * FROM books WHERE id=$1', [id]).then((res) => {
-    return res.rows;
+    return res.rows[0];
   });
 }
 
