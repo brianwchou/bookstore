@@ -20,8 +20,11 @@ function getAllBooks() {
   });
 }
 
-function updateBookWithId(id, author, title, pages) {
-  bookDB[id] = { author, title, pages };
+function updateBookWithId({ id, author, title, pages }) {
+  db.query(
+    'UPDATE books SET author = $1, title = $2, pages = $3 WHERE id = $4',
+    [author, title, pages, id]
+  );
 }
 
 function deleteBookWithId(id) {

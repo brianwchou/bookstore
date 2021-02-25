@@ -36,7 +36,7 @@ function updateBook(req, res) {
   const { bookId } = req.params;
   const { author, title, pages } = req.body;
 
-  bookService.updateBook({ bookId, author, title, pages });
+  bookService.updateBook({ id: +bookId, author, title, pages });
 
   res.send('record updated successfuly').status(200);
 }
