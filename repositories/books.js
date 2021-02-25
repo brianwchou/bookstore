@@ -1,12 +1,11 @@
-const { bookDB } = require('../db');
+const db = require('../db');
 
-function addBook(author, title, pages) {
-  bookDB.push({
-    id: bookDB.length,
+async function addBook(author, title, pages) {
+  db.query('INSERT INTO books(author, title, pages) VALUES($1,$2,$3)', [
     author,
     title,
     pages,
-  });
+  ]);
 }
 
 function getBookWithId(id) {
