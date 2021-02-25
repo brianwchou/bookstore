@@ -1,6 +1,6 @@
 const { userRepository } = require('../repositories');
 
-function findUserById(userId) {
+async function findUserById(userId) {
   return userRepository.getUserRecordById(userId);
 }
 

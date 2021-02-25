@@ -4,7 +4,7 @@ const { userCartService, userService } = require('../services');
 
 const userRouter = Router();
 
-userRouter.get('/', getUserById);
+userRouter.get('/:userId', getUserById);
 userRouter.post('/', addUser);
 userRouter.post('/:userId/cart', userValidation.validateUserId, putBooksInCart);
 
@@ -24,15 +24,15 @@ function putBooksInCart(req, res) {
   }
 }
 
-function getUserById(req, res) {
-  const { userId } = req.query;
+async function getUserById(req, res) {
+  const { userId } = req.params;
 
-  const record = userService.findUserById(userId);
+  const record = await userService.findUserById(+userId);
 
   res.status(200).json(record);
 }
 
-function addUser(req, res) {
+async function addUser(req, res) {
   const { username, firstName, lastName, email, password } = req.body;
   try {
     userService.createNewUser({
