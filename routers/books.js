@@ -26,8 +26,8 @@ async function getBookById(req, res) {
   res.json(book).status(200);
 }
 
-function getAllBooks(req, res) {
-  const books = bookService.getAllBooks();
+async function getAllBooks(req, res) {
+  const books = await bookService.getAllBooks();
 
   res.send(books).status(200);
 }

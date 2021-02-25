@@ -15,7 +15,9 @@ async function getBookWithId(id) {
 }
 
 function getAllBooks() {
-  return bookDB;
+  return db.query('SELECT * FROM books').then((res) => {
+    return res.rows;
+  });
 }
 
 function updateBookWithId(id, author, title, pages) {
