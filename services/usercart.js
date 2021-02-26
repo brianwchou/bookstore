@@ -23,7 +23,18 @@ async function getUserCart(userId) {
   return await cartRepository.getUsersCart(userId);
 }
 
+async function updateBooksInCart(userId, bookId, additional) {
+  const currentQuantity = await cartRepository.getBooksQuantity(userId, bookId);
+
+  cartRepository.updateBooksQuanity(
+    userId,
+    bookId,
+    currentQuantity + additional
+  );
+}
+
 module.exports = {
   addBooksToCart,
   getUserCart,
+  updateBooksInCart,
 };

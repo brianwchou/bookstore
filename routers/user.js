@@ -8,11 +8,24 @@ userRouter.get('/:userId', getUserById);
 userRouter.post('/', addUser);
 userRouter.post('/:userId/cart', userValidation.validateUserId, putBooksInCart);
 userRouter.get('/:userId/cart', userValidation.validateUserId, getUserCart);
+userRouter.put(
+  '/:userId/cart',
+  userValidation.validateUserId,
+  updateBooksInCart
+);
+
+async function updateBooksInCart(req, res) {
+  const { userId } = req.params;
+  const { bookId, quantity } = req.body;
+  userCartService.updateBooksInCart(userId, bookId, quantity);
+
+  res.status(200).send();
+}
 
 async function getUserCart(req, res) {
   const { userId } = req.params;
 
-  const cart = await userCartService.getUserCart(+userId);
+  const cart = await userCartService.getUserCart(userId);
 
   res.status(200).json(cart);
 }

@@ -10,10 +10,24 @@ async function getUsersCart(userId) {
       return res.rows;
     });
 }
+async function getBooksQuantity(userId, bookId) {
+  return db
+    .query('SELECT quantity FROM carts WHERE user_id=$1 AND book_id=$2', [
+      userId,
+      bookId,
+    ])
+    .then((res) => {
+      return res.rows[0].quantity;
+    });
+}
+
+async function updateBooksQuanity(userId, bookId, newQuantity) {}
 
 function addBookToUsersCart() {}
 
 module.exports = {
   getUsersCart,
   addBookToUsersCart,
+  getBooksQuantity,
+  updateBooksQuanity,
 };

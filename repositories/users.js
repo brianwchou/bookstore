@@ -11,7 +11,7 @@ async function addUser({ username, firstName, lastName, email, password }) {
 
 async function getUserRecordById(id) {
   return db.query('Select * FROM users WHERE id=$1', [id]).then((res) => {
-    return res.rows;
+    return res.rows[0];
   });
 }
 
