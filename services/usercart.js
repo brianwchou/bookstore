@@ -1,3 +1,6 @@
+const { cartRepository } = require('../repositories');
+const { bookService } = require('../services/book');
+
 function addBooksToCart(userId, books) {
   const notFoundBooks = bookService.getNotFoundBooks(booklist);
   if (notFoundBooks.length > 0) {
@@ -16,6 +19,11 @@ function addBooksToCart(userId, books) {
   return cartDB.getBooks();
 }
 
+async function getUserCart(userId) {
+  return await cartRepository.getUsersCart(userId);
+}
+
 module.exports = {
   addBooksToCart,
+  getUserCart,
 };

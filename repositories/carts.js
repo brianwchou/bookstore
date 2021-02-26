@@ -1,4 +1,4 @@
-const db = require('./db');
+const db = require('../db');
 
 async function getUsersCart(userId) {
   return db
@@ -14,7 +14,6 @@ async function getUsersCart(userId) {
 function addBookToUsersCart() {}
 
 module.exports = {
-  createNewCartForUser,
   getUsersCart,
   addBookToUsersCart,
 };

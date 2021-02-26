@@ -7,6 +7,15 @@ const userRouter = Router();
 userRouter.get('/:userId', getUserById);
 userRouter.post('/', addUser);
 userRouter.post('/:userId/cart', userValidation.validateUserId, putBooksInCart);
+userRouter.get('/:userId/cart', userValidation.validateUserId, getUserCart);
+
+async function getUserCart(req, res) {
+  const { userId } = req.params;
+
+  const cart = await userCartService.getUserCart(+userId);
+
+  res.status(200).json(cart);
+}
 
 function putBooksInCart(req, res) {
   const { userId } = req.params;
