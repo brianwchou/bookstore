@@ -21,7 +21,13 @@ async function getBooksQuantity(userId, bookId) {
     });
 }
 
-async function updateBooksQuanity(userId, bookId, newQuantity) {}
+async function updateBooksQuanity(userId, bookId, newQuantity) {
+  db.query('UPDATE carts SET quantity=$1 WHERE user_id=$2 AND book_id=$3 ', [
+    newQuantity,
+    userId,
+    bookId,
+  ]);
+}
 
 function addBookToUsersCart() {}
 
