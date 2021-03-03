@@ -29,7 +29,12 @@ async function updateBooksQuanity(userId, bookId, newQuantity) {
   ]);
 }
 
-function addBookToUsersCart() {}
+function addBookToUsersCart(userId, bookId) {
+  db.query('INSERT INTO carts(user_id, book_id, quantity) VALUES($1,$2,1)', [
+    userId,
+    bookId,
+  ]);
+}
 
 module.exports = {
   getUsersCart,

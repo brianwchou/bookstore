@@ -31,18 +31,16 @@ async function getUserCart(req, res) {
   res.status(200).json(cart);
 }
 
-function putBooksInCart(req, res) {
+async function putBooksInCart(req, res) {
   const { userId } = req.params;
   const booklist = req.body;
 
   try {
-    userCartService.addBooksToCart(userId, booklist);
+    await userCartService.addBooksToCart(userId, booklist);
     res.status(200).send('data received');
   } catch (error) {
     if (error.message === 'List contains unknown books') {
-      res
-        .status(400)
-        .send(`Could not find book title: ${notFoundBooks.join()}`);
+      res.status(400).send(`Could not find book title`);
     } else throw error;
   }
 }
@@ -50,7 +48,7 @@ function putBooksInCart(req, res) {
 async function getUserById(req, res) {
   const { userId } = req.params;
 
-  const record = await userService.findUserById(+userId);
+  const record = await userService.findUserById(userId);
 
   res.status(200).json(record);
 }

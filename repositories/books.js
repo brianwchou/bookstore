@@ -14,6 +14,14 @@ async function getBookWithId(id) {
   });
 }
 
+async function getBookByTitle(title) {
+  return db
+    .query('SELECT id FROM books WHERE title=$1', [title])
+    .then((res) => {
+      return res.rows[0];
+    });
+}
+
 function getAllBooks() {
   return db.query('SELECT * FROM books').then((res) => {
     return res.rows;
@@ -34,6 +42,7 @@ function deleteBookWithId(id) {
 module.exports = {
   addBook,
   getBookWithId,
+  getBookByTitle,
   getAllBooks,
   deleteBookWithId,
   updateBookWithId,
