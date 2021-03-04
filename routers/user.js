@@ -9,10 +9,31 @@ userRouter.post('/', addUser);
 userRouter.post('/:userId/cart', userValidation.validateUserId, putBooksInCart);
 userRouter.get('/:userId/cart', userValidation.validateUserId, getUserCart);
 userRouter.put(
-  '/:userId/cart',
+  '/:userId/cart/:bookId/add/:quantity',
   userValidation.validateUserId,
-  updateBooksInCart
+  addBooksToCart
 );
+userRouter.put(
+  '/:userId/cart/:bookId/remove/:quantity',
+  userValidation.validateUserId,
+  removeBooksFromCart
+);
+
+async function addBooksToCart(req, res) {
+  const { userId, bookId, quantity } = req.params;
+
+  userCartService.incrementBookQuantity(userId, bookId, quantity);
+
+  res.status(200).send();
+}
+
+async function removeBooksFromCart(req, res) {
+  const { userId, bookId, quantity } = req.params;
+
+  userCartService.decrementBookQuantity(userId, bookId, quantity);
+
+  res.status(200).send();
+}
 
 async function updateBooksInCart(req, res) {
   const { userId } = req.params;
