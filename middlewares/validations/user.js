@@ -1,9 +1,11 @@
-const { userDB } = require('../../db');
+const { userRepository } = require('../../repositories');
 
-function validateUserId(req, res, next) {
+async function validateUserId(req, res, next) {
   const { userId } = req.params;
 
-  if (userId < 0 || userId > userDB.length) {
+  const user = await userRepository.getUserRecordById(userId);
+
+  if (!user) {
     res.send('user id does not exist').status(409);
     return;
   }

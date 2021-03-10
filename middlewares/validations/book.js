@@ -1,11 +1,12 @@
-const { booksDB } = require('../../db');
+const { bookService } = require('../../services');
 
-function validateBookId(req, res, next) {
-  const { id } = req.params;
-  const index = Number(id);
+async function validateBookId(req, res, next) {
+  const { bookId } = req.params;
 
-  if (index < 0 || index >= booksDB.length) {
-    res.send('record id is out of bounds').status(409);
+  let book = await bookService.getBookById(bookId);
+
+  if (!book) {
+    res.send('record id does not exist').status(409);
     return;
   }
   next();

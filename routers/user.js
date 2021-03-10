@@ -4,39 +4,86 @@ const { userCartService, userService } = require('../services');
 
 const userRouter = Router();
 
-userRouter.get('/', getUserById);
+userRouter.get('/:userId', getUserById);
 userRouter.post('/', addUser);
 userRouter.post('/:userId/cart', userValidation.validateUserId, putBooksInCart);
+userRouter.get('/:userId/cart', userValidation.validateUserId, getUserCart);
+userRouter.put(
+  '/:userId/cart/:bookId/add/:quantity',
+  userValidation.validateUserId,
+  addBooksToCart
+);
+userRouter.put(
+  '/:userId/cart/:bookId/remove/:quantity',
+  userValidation.validateUserId,
+  removeBooksFromCart
+);
 
-function putBooksInCart(req, res) {
+async function addBooksToCart(req, res) {
+  const { userId, bookId, quantity } = req.params;
+
+  userCartService.incrementBookQuantity(userId, bookId, quantity);
+
+  res.status(200).send();
+}
+
+async function removeBooksFromCart(req, res) {
+  const { userId, bookId, quantity } = req.params;
+
+  userCartService.decrementBookQuantity(userId, bookId, quantity);
+
+  res.status(200).send();
+}
+
+async function updateBooksInCart(req, res) {
+  const { userId } = req.params;
+  const { bookId, quantity } = req.body;
+
+  userCartService.updateBooksInCart(userId, bookId, quantity);
+
+  res.status(200).send();
+}
+
+async function getUserCart(req, res) {
+  const { userId } = req.params;
+
+  const cart = await userCartService.getUserCart(userId);
+
+  res.status(200).json(cart);
+}
+
+async function putBooksInCart(req, res) {
   const { userId } = req.params;
   const booklist = req.body;
 
   try {
-    userCartService.addBooksToCart(userId, booklist);
+    await userCartService.addBooksToCart(userId, booklist);
     res.status(200).send('data received');
   } catch (error) {
     if (error.message === 'List contains unknown books') {
-      res
-        .status(400)
-        .send(`Could not find book title: ${notFoundBooks.join()}`);
+      res.status(400).send(`Could not find book title`);
     } else throw error;
   }
 }
 
-function getUserById(req, res) {
-  const { userId } = req.query;
+async function getUserById(req, res) {
+  const { userId } = req.params;
 
-  const record = userService.findUserById(userId);
+  const record = await userService.findUserById(userId);
 
   res.status(200).json(record);
 }
 
-function addUser(req, res) {
+async function addUser(req, res) {
   const { username, firstName, lastName, email, password } = req.body;
-
   try {
-    userService.create({ username, firstName, lastName, email, password });
+    userService.createNewUser({
+      username,
+      firstName,
+      lastName,
+      email,
+      password,
+    });
     res.status(200).send('added a customer record');
   } catch (error) {
     if (error.message === 'Username in use') {

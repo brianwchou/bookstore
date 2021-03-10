@@ -1,37 +1,41 @@
 const { bookRepository } = require('../repositories');
 
-function getNotFoundBooks(booklist) {
-  const existingBookTitles = bookRepository
-    .getAllBooks()
-    .map((book) => book.title);
+async function getNotFoundBooks(booklist) {
+  let allBooks;
+  try {
+    allBooks = await bookRepository.getAllBooks();
+  } catch (error) {
+    console.log(error);
+  }
+  const existingBookTitles = allBooks.map((book) => book.title);
 
-  return booklist.filter(({ title }) => existingBookTitles.includes(title));
+  return booklist.filter((title) => !existingBookTitles.includes(title));
 }
 
-function createBook(author, title, pages) {
+async function createBook(author, title, pages) {
   bookRepository.addBook(author, title, pages);
 }
 
-function getBook(id) {
+async function getBookById(id) {
   return bookRepository.getBookWithId(id);
 }
 
-function getAllBooks() {
+async function getAllBooks() {
   return bookRepository.getAllBooks();
 }
 
-function updateBook(bookData) {
+async function updateBook(bookData) {
   bookRepository.updateBookWithId(bookData);
 }
 
-function deleteBook(id) {
+async function deleteBook(id) {
   bookRepository.deleteBookWithId(id);
 }
 
 module.exports = {
   getNotFoundBooks,
   createBook,
-  getBook,
+  getBookById,
   updateBook,
   getAllBooks,
   deleteBook,

@@ -1,6 +1,5 @@
-const books = require('../db/bookDB');
-
 module.exports = {
+  cartRepository: require('./carts'),
   bookRepository: require('./books'),
   userRepository: require('./users'),
 };
