@@ -1,11 +1,15 @@
 const { bookRepository } = require('../repositories');
 
 async function getNotFoundBooks(booklist) {
-  const existingBookTitles = bookRepository
-    .getAllBooks()
-    .map((book) => book.title);
+  let allBooks;
+  try {
+    allBooks = await bookRepository.getAllBooks();
+  } catch (error) {
+    console.log(error);
+  }
+  const existingBookTitles = allBooks.map((book) => book.title);
 
-  return booklist.filter(({ title }) => existingBookTitles.includes(title));
+  return booklist.filter((title) => !existingBookTitles.includes(title));
 }
 
 async function createBook(author, title, pages) {
