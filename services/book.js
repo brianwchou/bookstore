@@ -6,6 +6,7 @@ async function getNotFoundBooks(booklist) {
     allBooks = await bookRepository.getAllBooks();
   } catch (error) {
     console.log(error);
+    throw error;
   }
   const existingBookTitles = allBooks.map((book) => book.title);
 
