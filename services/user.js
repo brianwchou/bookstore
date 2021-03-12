@@ -5,7 +5,7 @@ async function findUserById(userId) {
 }
 
 async function createNewUser(newUserData) {
-  if (userRepository.hasUsername(newUserData.username)) {
+  if (await userRepository.hasUsername(newUserData.username)) {
     throw new Error('Username in use');
   }
   userRepository.addUser(newUserData);
