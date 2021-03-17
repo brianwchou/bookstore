@@ -14,11 +14,7 @@ describe('User Service', () => {
     };
 
     test('should throw Error if username exists', async () => {
-      userRepository.hasUsername = jest
-        .fn()
-        .mockImplementation(async (username) => {
-          return true;
-        });
+      userRepository.hasUsername = jest.fn().mockResolvedValue(true);
 
       let result;
 
@@ -30,11 +26,7 @@ describe('User Service', () => {
     });
 
     test('should run call userRepository.addUser with new username', async () => {
-      userRepository.hasUsername = jest
-        .fn()
-        .mockImplementation(async (username) => {
-          return false;
-        });
+      userRepository.hasUsername = jest.fn().mockResolvedValue(false);
 
       let result;
 
