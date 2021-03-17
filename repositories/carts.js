@@ -36,9 +36,15 @@ function addBookToUsersCart(userId, bookId) {
   ]);
 }
 
+function removeBookFromCart(userId, bookId) {
+  // db.query(, [
+  // ]);
+}
+
 module.exports = {
   getUsersCart,
   addBookToUsersCart,
   getBooksQuantity,
   updateBooksQuanity,
+  removeBookFromCart,
 };
