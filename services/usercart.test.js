@@ -6,11 +6,11 @@ jest.mock('../repositories/');
 jest.mock('./book');
 
 describe('Usercart Service', () => {
-  describe('#addbooksToCart', () => {
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
+  describe('#addbooksToCart', () => {
     test('should add several books to usercart', async () => {
       bookService.getNotFoundBooks = jest.fn().mockResolvedValue([]);
       bookRepository.getBookByTitle = jest.fn().mockResolvedValue({ id: 1 });
