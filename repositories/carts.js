@@ -37,8 +37,10 @@ function addBookToUsersCart(userId, bookId) {
 }
 
 function removeBookFromCart(userId, bookId) {
-  // db.query(, [
-  // ]);
+  db.query('DELETE FROM carts where book_id=$1 AND user_id=$2', [
+    userId,
+    bookId,
+  ]);
 }
 
 module.exports = {
