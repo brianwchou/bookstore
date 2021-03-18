@@ -23,7 +23,7 @@ describe('Book Service', () => {
       );
     });
 
-    test('should return empty array when input conatins all matching titles', async () => {
+    test('should return empty array when input contains all matching titles', async () => {
       bookRepository.getAllBooks = jest
         .fn()
         .mockImplementation(() => [
