@@ -12,15 +12,15 @@ describe('Usercart Service', () => {
 
   describe('#addbooksToCart', () => {
     test('should add several books to usercart', async () => {
-      bookService.getNotFoundBooks = jest.fn().mockResolvedValue([]);
-      bookRepository.getBookByTitle = jest.fn().mockResolvedValue({ id: 1 });
-
       const userId = 1;
       const books = [
         'agile methodology',
         'some book title',
         'anothr book title',
       ];
+
+      bookService.getNotFoundBooks = jest.fn().mockResolvedValue([]);
+      bookRepository.getBookByTitle = jest.fn().mockResolvedValue({ id: 1 });
 
       await usercartService.addBooksToCart(userId, books);
 
@@ -30,13 +30,13 @@ describe('Usercart Service', () => {
     });
 
     test('should add a book to usercart', async () => {
+      const userId = 1;
+      const books = ['agile methodology'];
+
       bookService.getNotFoundBooks = jest.fn().mockResolvedValue([]);
       bookRepository.getBookByTitle = jest.fn().mockResolvedValue({
         id: 1,
       });
-
-      const userId = 1;
-      const books = ['agile methodology'];
 
       await usercartService.addBooksToCart(userId, books);
 
@@ -46,15 +46,15 @@ describe('Usercart Service', () => {
     });
 
     test('should throw error when books are not found', async () => {
+      const userId = 1;
+      const books = ['agile methodology'];
+
       bookService.getNotFoundBooks = jest
         .fn()
         .mockResolvedValue(['a title not found']);
       bookRepository.getBookByTitle = jest.fn().mockResolvedValue({
         id: 1,
       });
-
-      const userId = 1;
-      const books = ['agile methodology'];
 
       expect(usercartService.addBooksToCart(userId, books)).rejects.toThrow(
         'List contains unknown books'
@@ -82,6 +82,7 @@ describe('Usercart Service', () => {
       const decrement = 1;
 
       cartRepository.getBooksQuantity = jest.fn().mockResolvedValue(2);
+
       await usercartService.decrementBookQuantity(userId, bookId, decrement);
 
       expect(cartRepository.removeBookFromCart).toHaveBeenCalledTimes(0);

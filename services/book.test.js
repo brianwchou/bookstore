@@ -18,11 +18,9 @@ describe('Book Service', () => {
         throw new Error('books not found');
       });
 
-      try {
-        await bookService.getNotFoundBooks(['some book title']);
-      } catch (error) {
-        expect(error).toStrictEqual(Error('books not found'));
-      }
+      expect(bookService.getNotFoundBooks(['some book title'])).rejects.toThrow(
+        Error('books not found')
+      );
     });
 
     test('should return empty array when input conatins all matching titles', async () => {
