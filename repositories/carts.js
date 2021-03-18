@@ -22,7 +22,7 @@ async function getBooksQuantity(userId, bookId) {
 }
 
 async function updateBooksQuanity(userId, bookId, newQuantity) {
-  db.query('UPDATE carts SET quantity=$1 WHERE user_id=$2 AND book_id=$3 ', [
+  db.query('UPDATE carts SET quantity=$1 WHERE user_id=$2 AND book_id=$3', [
     newQuantity,
     userId,
     bookId,
@@ -30,7 +30,7 @@ async function updateBooksQuanity(userId, bookId, newQuantity) {
 }
 
 function addBookToUsersCart(userId, bookId) {
-  db.query('INSERT INTO carts(user_id, book_id, quantity) VALUES($1,$2,1)', [
+  db.query('INSERT INTO carts(user_id, book_id, quantity) VALUES($1, $2, 1)', [
     userId,
     bookId,
   ]);

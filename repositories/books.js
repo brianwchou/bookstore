@@ -1,7 +1,7 @@
 const db = require('../db');
 
 async function addBook(author, title, pages) {
-  db.query('INSERT INTO books(author, title, pages) VALUES($1,$2,$3)', [
+  db.query('INSERT INTO books(author, title, pages) VALUES($1, $2, $3)', [
     author,
     title,
     pages,
@@ -29,10 +29,12 @@ function getAllBooks() {
 }
 
 function updateBookWithId({ id, author, title, pages }) {
-  db.query(
-    'UPDATE books SET author = $1, title = $2, pages = $3 WHERE id = $4',
-    [author, title, pages, id]
-  );
+  db.query('UPDATE books SET author=$1, title=$2, pages=$3 WHERE id=$4', [
+    author,
+    title,
+    pages,
+    id,
+  ]);
 }
 
 function deleteBookWithId(id) {
