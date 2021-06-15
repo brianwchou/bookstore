@@ -4,6 +4,7 @@ async function getNotFoundBooks(booklist) {
   let allBooks;
   try {
     allBooks = await bookRepository.getAllBooks();
+    console.log(allBooks);
   } catch (error) {
     throw error;
   }

@@ -18,11 +18,9 @@ describe('User Service', () => {
 
       let result;
 
-      try {
+      expect(async () => {
         result = await userService.createNewUser(userData);
-      } catch (error) {
-        expect(error).toStrictEqual(Error('Username in use'));
-      }
+      }).rejects.toThrow(Error('Username in use'));
     });
 
     test('should run call userRepository.addUser with new username', async () => {

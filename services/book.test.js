@@ -31,12 +31,9 @@ describe('Book Service', () => {
           { title: 'another book title' },
         ]);
 
-      let booksNotFound;
-      try {
-        booksNotFound = await bookService.getNotFoundBooks(['some book title']);
-      } catch {}
-
-      expect(booksNotFound).toStrictEqual([]);
+      expect(
+        bookService.getNotFoundBooks(['some book title'])
+      ).resolves.toStrictEqual([]);
     });
 
     test('should return titles that dont exist', async () => {
@@ -47,12 +44,9 @@ describe('Book Service', () => {
           { title: 'another book title' },
         ]);
 
-      let booksNotFound;
-      try {
-        booksNotFound = await bookService.getNotFoundBooks(['some book title']);
-      } catch {}
-
-      expect(booksNotFound).toStrictEqual(['some book title']);
+      expect(
+        bookService.getNotFoundBooks(['some book title'])
+      ).resolves.toStrictEqual(['some book title']);
     });
   });
 });
