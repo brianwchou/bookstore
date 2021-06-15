@@ -3,7 +3,7 @@ const bookService = require('../services/book');
 
 async function addBooksToCart(userId, books) {
   const notFoundBooks = await bookService.getNotFoundBooks(books);
-  console.log(notFoundBooks);
+
   if (notFoundBooks.length > 0) {
     throw Error('List contains unknown books');
   }
@@ -15,7 +15,7 @@ async function addBooksToCart(userId, books) {
       return book.id;
     })
   );
-  console.log('bookids', bookIds);
+
   for (const bookId of bookIds) {
     cartRepository.addBookToUsersCart(userId, bookId);
   }

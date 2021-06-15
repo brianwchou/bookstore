@@ -1,10 +1,16 @@
 const db = require('../db');
 
-function hasUsername(username) {}
+async function hasUsername(username) {
+  return db
+    .query('SELECT 1 FROM users WHERE username=$1', [username])
+    .then((res) => {
+      return res.rows.length >= 1;
+    });
+}
 
 async function addUser({ username, firstName, lastName, email, password }) {
   return db.query(
-    'INSERT INTO users(username, firstname, lastname, email, password) VALUES ($1,$2,$3,$4,$5)',
+    'INSERT INTO users(username, firstname, lastname, email, password) VALUES ($1, $2, $3, $4, $5)',
     [username, firstName, lastName, email, password]
   );
 }

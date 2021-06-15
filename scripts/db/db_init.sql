@@ -46,10 +46,10 @@ VALUES
     ('Heriberto Perutto', 'Right-sized', 785);
 
 CREATE TABLE carts (
-    id SERIAL PRIMARY KEY,
     book_id integer REFERENCES books(id),
     user_id integer REFERENCES users(id),
-    quantity integer
+    quantity integer,
+    PRIMARY KEY (book_id, user_id)
 );
 
 INSERT INTO carts(book_id, user_id, quantity)
@@ -61,7 +61,6 @@ values
     (1, 7, 4),
     (10, 1, 7),
     (2, 6, 6),
-    (1, 5, 8),
     (14, 8, 2),
     (11, 1, 4),
     (5, 6, 5),
@@ -71,7 +70,6 @@ values
     (6, 5, 8),
     (6, 8, 7),
     (7, 5, 2),
-    (12, 3, 6),
     (4, 2, 8),
     (12, 3, 4),
     (9, 10, 10),
@@ -81,16 +79,13 @@ values
     (14, 6, 4),
     (5, 4, 1),
     (2, 10, 6),
-    (14, 6, 3),
     (3, 8, 5),
-    (11, 1, 3),
     (10, 8, 10),
     (15, 3, 7),
     (6, 7, 7),
     (11, 7, 4),
     (14, 5, 2),
     (7, 2, 7),
-    (2, 7, 3),
     (2, 9, 5),
     (2, 7, 2),
     (12, 2, 10),
@@ -100,7 +95,5 @@ values
     (6, 2, 4),
     (1, 2, 2),
     (12, 5, 3),
-    (1, 5, 1),
-    (10, 9, 4),
     (5, 5, 8),
     (14, 10, 1);
